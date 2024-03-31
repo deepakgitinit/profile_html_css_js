@@ -4,8 +4,7 @@ const bodyParser = require('body-parser');
 const nodemailer = require("nodemailer");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-const hostname = '127.0.0.1';
-const port = 3000;
+require('dotenv').config()
 
 
 app.use(express.static('/static'));
@@ -13,7 +12,6 @@ app.use('/css', express.static('static/css'));
 app.use('/img', express.static('static/img'));
 app.use('/js', express.static('static/js'));
 app.use('/downloads', express.static('static/downloads'));
-
 
 
 app.get('/', (req, res)=>{
@@ -44,14 +42,14 @@ async function main(obj) {
     port: 465,
     secure: true,
     auth: {
-        user: 'deepakhomemail@gmail.com',
-        pass: 'jygyolbzlsdlenos',
+        user: process.env.APP_USERNAME,
+        pass: process.env.APP_PASSWORD,
     },
     });
 
     await transporter.sendMail({
         from: `${obj.email}`,
-        to: `deepakhomemail@gmail.com`,
+        to: process.env.APP_USERNAME,
         subject: `A new Message from ${obj.name} Recieved`,
         text: `Message:[${obj.message}] from ${obj.email}! ${obj.company}`
     });
@@ -94,6 +92,6 @@ app.post('/contact', urlencodedParser, (req, res)=>{
 
 
 
-app.listen(port, hostname, ()=>{
-    console.log(`The App is Listening on Port '${port}' of Host '${hostname}'`);
+app.listen(process.env.PORT || 3000, process.env.HOSTNAME, ()=>{
+    console.log(`The App is Listening on Port '${process.env.PORT}' of Host '${process.env.HOSTNAME}'`);
 });

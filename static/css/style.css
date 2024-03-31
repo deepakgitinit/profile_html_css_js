@@ -608,6 +608,10 @@ button{
     position: relative;
 }
 
+.card_img{
+    object-fit: cover;
+}
+
 .card img{
     width: 16rem;
     height: 9rem;
@@ -797,6 +801,10 @@ button{
     background: linear-gradient(45deg, #ffc0cb7d, #87ceeb7a);
     z-index: -1;
     transition: all 1s ease-out;
+}
+
+.img_project{
+    object-fit: cover;
 }
 
 .img_info_intersect{

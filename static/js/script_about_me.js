@@ -66,15 +66,43 @@ contact.style.left = `${((window.innerWidth - contact.clientWidth)/2)/16}rem`
 // Dark Theme Button
 //=======================================================================================//
 
-let darkTheme = document.getElementsByClassName('dark-theme')[0];
-let bodyDarkTheme = document.getElementsByClassName('body-dark-theme')[0];
+let darkTheme = document.getElementsByClassName("dark-theme")[0];
+let bodyDarkTheme = document.getElementsByClassName("body-dark-theme")[0];
 
-darkTheme.addEventListener('click', () => {
-    darkTheme.classList.toggle('dark-theme-toggle');
-    document.body.classList.toggle('body-dark-theme');
-    appbox_a.classList.toggle('appbox_a_invert');
-    contact.classList.toggle('contact_invert');
+let darkState = localStorage.getItem("darkTheme") || true;
+
+if (darkState === "false") {
+    setLightTheme();
+}
+
+darkTheme.addEventListener("click", () => {
+    darkState = localStorage.getItem("darkTheme");
+
+    if (darkState === "true") {
+        darkState = false;
+        localStorage.setItem("darkTheme", false);
+        setLightTheme();
+        
+    } else {
+        darkState = true;
+        localStorage.setItem("darkTheme", true);
+        setDarkTheme();
+  }
 });
+
+function setDarkTheme() {
+  darkTheme.classList.remove("dark-theme-toggle");
+  document.body.classList.remove("body-dark-theme");
+  appbox_a.classList.add("appbox_a_invert");
+  contact.classList.add("contact_invert");
+}
+
+function setLightTheme() {
+  darkTheme.classList.add("dark-theme-toggle");
+  document.body.classList.add("body-dark-theme");
+  appbox_a.classList.remove("appbox_a_invert");
+  contact.classList.remove("contact_invert");
+}
 
 //=======================================================================================//
 // About Section Scroll
