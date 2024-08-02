@@ -92,6 +92,6 @@ app.post('/contact', urlencodedParser, (req, res)=>{
 
 
 
-app.listen(process.env.PORT || 3000, process.env.HOSTNAME, ()=>{
-    console.log(`The App is Listening on Port '${process.env.PORT}' of Host '${process.env.HOSTNAME}'`);
+app.listen(process.env.PORT || 3000, ()=>{
+    console.log(`The App is Listening on Port '${process.env.PORT}'`);
 });
